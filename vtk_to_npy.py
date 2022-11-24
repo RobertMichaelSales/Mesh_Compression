@@ -85,6 +85,55 @@ def VTKtoNPY(vtk_filename,variable_name,resolution):
     return npy_data
 
 #==============================================================================
+# Define a function to find all the coordinates of a structured 3D mesh
+
+def ExtractAllCoords(volume,plot=True):
+    
+    all_coords = np.reshape(volume[:,:,:,:3],(-1,3))
+    
+    if plot:
+        # Create a figure with 3-dimensional axes    
+        fig = plt.figure(figsize=(28, 28))
+        ax = fig.add_subplot(projection='3d')
+
+        # Plot the face points        
+        ax.scatter(xs=all_coords[...,0],ys=all_coords[...,1],zs=all_coords[...,2],c="blue",s=0.5)
+            
+        # Label each of the axes
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('z')
+    
+        # Display the figure 
+        plt.show()
+    
+    return all_coords
+
+#==============================================================================
+# Define a function to plot all the coordinates of a structured 3D mesh
+
+def PlotAll(volume):
+    
+    all_coords = volume[:,:,:,:3]
+    
+    # Create a figure with 3-dimensional axes    
+    fig = plt.figure(figsize=(28, 28))
+    ax = fig.add_subplot(projection='3d')
+
+    # Plot the face points        
+    ax.scatter(xs=all_coords[...,0],ys=all_coords[...,1],zs=all_coords[...,2],c="blue",s=0.5)
+        
+    # Label each of the axes
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
+
+    # Display the figure 
+    plt.show()
+    
+    return None
+    
+#==============================================================================
 # Define a function to find the face coordinates of a structured 3D mesh
 
 def ExtractFaceCoords(volume,plot=True):
